@@ -6,6 +6,20 @@
 </head>
 <body>
 <p>100 posts!</p>
+<table>
+    <tr>
+        <td>#</td>
+        <td>Name</td>
+        <td>Date</td>
+    </tr>
+    {% for post in posts %}
+    <tr>
+        <td>1</td>
+        <td>{{ post.name }}</td>
+        <td>{{ post.date }}</td>
+    </tr>
+    {% endfor %}
+</table>
 <a href="/">Go back</a>
 </body>
 </html>
