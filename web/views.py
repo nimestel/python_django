@@ -1,19 +1,14 @@
 from django.http import HttpResponse
+from django.shortcuts import render
 
 
 def index(request):
-    return HttpResponse('<h1>My blog</h1>'
-                        '<p>Hello, World!</p>'
-                        '<a href="/contacts">Contacts</a><br>'
-                        '<a href="/articles">Articles</a>')
+    return render(request, 'index.html')
 
 
 def contacts(request):
-    return HttpResponse('<h2>My contacts</h2>'
-                        '<p>email: 123@mail.ru</p>'
-                        '<a href="/">Go back</a>')
+    return render(request, 'contacts.html')
 
 
 def articles(request):
-    return HttpResponse('<p>100 posts!</p>'
-                        '<a href="/">Go back</a>')
+    return render(request, 'articles.html')
