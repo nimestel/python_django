@@ -1,14 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>My contacts</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block title %}Contacts{% endblock %}
+{% block content %}
 <h2>My contacts</h2>
 <p><i>email:</i> {{email }}<br>
     <b><i>phone:</i> {{phone }}</b></p>
 <p><i>server time:</i> {{server_time }}</p>
-<a href="/">Go back</a>
-</body>
-</html>
+{% endblock %}

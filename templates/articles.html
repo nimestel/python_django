@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Articles</title>
-</head>
-<body>
-<p>100 posts!</p>
+{% extends 'base.html' %}
+{% block title %}Posts{% endblock %}
+{% block content %}
+<h2>My posts</h2>
 <table>
     <tr>
         <td>#</td>
@@ -20,6 +16,4 @@
     </tr>
     {% endfor %}
 </table>
-<a href="/">Go back</a>
-</body>
-</html>
+{% endblock %}
