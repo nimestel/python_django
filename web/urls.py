@@ -5,5 +5,6 @@ from web import views
 urlpatterns = [
     path('', views.index),
     path('contacts', views.contacts),
-    path('articles', views.articles),
+    path('posts', views.posts),
+    path('post', views.post),
 ]
