@@ -3,6 +3,7 @@ from datetime import datetime
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
+from web.models import Post
 from blog import settings
 
 
@@ -65,15 +66,20 @@ Namespaces are one honking great idea -- let's do more of those!</i>"""
 
 
 def posts(request):
+    post_objects = Post.objects.all()
     return render(request, 'posts.html', context={
-        'posts': reversed(posts_data)
+        'posts': posts #reversed(posts_data)
     })
 
 
 def post(request, number):
-    if number >= len(posts_data):
+    try:
+        post = Post.objects.get(id=number)
+    except Post.DoesNotExist:
         return redirect('/posts')
-    return render(request, 'post.html', context=posts_data[number])
+    return render(request, 'post.html', context={
+        'post': post
+    })
 
 
 def publish(request):

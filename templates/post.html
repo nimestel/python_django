@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
-{% block title %}{{ title }}{% endblock %}
+{% block title %}{{ post.title }}{% endblock %}
 {% block content %}
-<h2>{{ title }}</h2>
-<p>{{ text|safe }}<br>
-<p><i>Public date:</i> {{ date|date:"H:i d/m/Y" }}<br>
+<h2>{{ post.title }}</h2>
+<p>{{ post.text|safe }}<br>
+<p><i>Public date:</i> {{ post.date|date:"H:i d/m/Y" }}<br>
 {% endblock %}
