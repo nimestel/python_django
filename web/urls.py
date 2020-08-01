@@ -7,4 +7,5 @@ urlpatterns = [
     path('contacts', views.contacts),
     path('posts', views.posts),
     path('posts/<int:number>', views.post),
+    path('publish', views.publish),
 ]

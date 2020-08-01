@@ -3,6 +3,8 @@ from datetime import datetime
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
+from blog import settings
+
 
 def index(request):
     return render(request, 'index.html')
@@ -72,3 +74,25 @@ def post(request, number):
     if number >= len(posts_data):
         return redirect('/posts')
     return render(request, 'post.html', context=posts_data[number])
+
+
+def publish(request):
+    if request.method == 'POST':
+        password = request.POST.get('password', '')
+        title = request.POST.get('title', '')
+        text = request.POST.get('text', '')
+
+        if not password or not title or not text:
+            return render(request, 'publish.html', {'error': 'empty field!'})
+        if password != settings.PUBLISH_PASSWORD:
+            return render(request, 'publish.html',  {'error': 'invalid password!'})
+
+        posts_data.append({
+            'id': len(posts_data),
+            'title': title,
+            'date': datetime.now(),
+            'text': text
+        })
+        return redirect('/posts/' + str(posts_data[-1]['id']))
+
+    return render(request, 'publish.html')
