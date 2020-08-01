@@ -68,7 +68,7 @@ Namespaces are one honking great idea -- let's do more of those!</i>"""
 def posts(request):
     post_objects = Post.objects.all()
     return render(request, 'posts.html', context={
-        'posts': posts #reversed(posts_data)
+        'posts': post_objects
     })
 
 
@@ -93,12 +93,8 @@ def publish(request):
         if password != settings.PUBLISH_PASSWORD:
             return render(request, 'publish.html',  {'error': 'invalid password!'})
 
-        posts_data.append({
-            'id': len(posts_data),
-            'title': title,
-            'date': datetime.now(),
-            'text': text
-        })
-        return redirect('/posts/' + str(posts_data[-1]['id']))
+        post = Post(text=text, title=title)
+        post.save()
+        return redirect('/posts/' + str(post.id))
 
     return render(request, 'publish.html')
