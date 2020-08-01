@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 
 def index(request):
@@ -16,17 +16,27 @@ def contacts(request):
     })
 
 
-def posts(request):
-    return render(request, 'posts.html', context={
-        'posts': [
-            {'name': 'post1', 'date': 123},
-            {'name': 'post2', 'date': 321},
-        ],
-    })
-
-
-def post(request):
-    return render(request, 'post.html', context={
+posts_data = [
+    {
+        'id': 0,
+        'title': 'title 0',
+        'date': datetime.now(),
+        'text': """ some test0 """,
+    },
+    {
+        'id': 1,
+        'title': 'title 1',
+        'date': datetime.now(),
+        'text': """ some test1 """,
+    },
+    {
+        'id': 2,
+        'title': 'title 2',
+        'date': datetime.now(),
+        'text': """ some test2 """,
+    },
+    {
+        'id': 3,
         'title': 'The Zen of Python, by Tim Peters',
         'date': datetime.now(),
         'text': """<i>Beautiful is better than ugly.<br>
@@ -48,4 +58,17 @@ Although never is often better than *right* now.<br>
 If the implementation is hard to explain, it's a bad idea.<br>
 If the implementation is easy to explain, it may be a good idea.<br>
 Namespaces are one honking great idea -- let's do more of those!</i>"""
+    }
+]
+
+
+def posts(request):
+    return render(request, 'posts.html', context={
+        'posts': reversed(posts_data)
     })
+
+
+def post(request, number):
+    if number >= len(posts_data):
+        return redirect('/posts')
+    return render(request, 'post.html', context=posts_data[number])
