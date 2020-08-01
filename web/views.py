@@ -66,7 +66,7 @@ Namespaces are one honking great idea -- let's do more of those!</i>"""
 
 
 def posts(request):
-    post_objects = Post.objects.all()
+    post_objects = Post.objects.all().order_by('-date')
     return render(request, 'posts.html', context={
         'posts': post_objects
     })
